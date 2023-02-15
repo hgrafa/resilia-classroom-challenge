@@ -1,4 +1,4 @@
-package br.com.resilia.smartclasses.model;
+package br.com.resilia.smartclasses.domain.model;
 
 import jakarta.persistence.*;
 import lombok.*;

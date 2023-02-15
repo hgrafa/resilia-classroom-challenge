@@ -1,4 +1,4 @@
-package br.com.resilia.smartclasses.model;
+package br.com.resilia.smartclasses.domain.model;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -14,6 +14,8 @@ public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    private String name;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     private List<Team> classrooms = new ArrayList<>();

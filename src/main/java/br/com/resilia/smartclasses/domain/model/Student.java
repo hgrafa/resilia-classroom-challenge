@@ -1,4 +1,4 @@
-package br.com.resilia.smartclasses.model;
+package br.com.resilia.smartclasses.domain.model;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,5 +12,9 @@ public class Student {
     private String cpf;
     private String name;
     private String email;
+
+    @ManyToOne
+    @JoinColumn(name = "team_id")
+    private Team team;
 
 }
