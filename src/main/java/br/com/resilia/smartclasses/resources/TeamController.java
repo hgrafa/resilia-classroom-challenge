@@ -3,6 +3,8 @@ package br.com.resilia.smartclasses.resources;
 import br.com.resilia.smartclasses.domain.dto.NewTeamRequest;
 import br.com.resilia.smartclasses.domain.dto.NewTeamResponse;
 import br.com.resilia.smartclasses.domain.dto.TeamResponse;
+import br.com.resilia.smartclasses.domain.dto.UpdateTeamRequest;
+import br.com.resilia.smartclasses.domain.model.Team;
 import br.com.resilia.smartclasses.services.TeamService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -36,8 +38,27 @@ public class TeamController {
         return ResponseEntity.ok(teamResponse);
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<TeamResponse> updateTeam (
+            @PathVariable long id,
+            @RequestBody UpdateTeamRequest updateTeamRequest
+    ) {
+
+        try {
+            var updatedTeam = teamService.updateTeambyId(id, updateTeamRequest);
+            var teamResponse = new TeamResponse(updatedTeam);
+            return ResponseEntity.ok(teamResponse);
+        }  catch (Exception ignored) {
+            // TODO catch exception updating team that not exist with 404
+            return ResponseEntity.badRequest().build();
+        }
+
+    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> removeTeam(@PathVariable long id) {
+    public ResponseEntity<String> removeTeam(
+            @PathVariable long id
+    ) {
         var isNotDeleted = !teamService.deleteById(id);
         var successMessage = "team has been deleted";
         var failedMessage = "team could not be founded to be deleted";
