@@ -6,6 +6,7 @@ import br.com.resilia.smartclasses.domain.dto.TeamResponse;
 import br.com.resilia.smartclasses.services.TeamService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,8 +37,15 @@ public class TeamController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> removeTeam(@PathVariable long id) {
-        teamService.deleteById(id);
+    public ResponseEntity<String> removeTeam(@PathVariable long id) {
+        var isNotDeleted = !teamService.deleteById(id);
+        var successMessage = "team has been deleted";
+        var failedMessage = "team could not be founded to be deleted";
+
+        if(isNotDeleted)
+            return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body(failedMessage);
+
+        return ResponseEntity.ok(successMessage);
     }
 
 }
