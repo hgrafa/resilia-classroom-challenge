@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -21,10 +22,10 @@ public class Lesson {
     private String name;
     private LocalDateTime moment;
     private String meetingLink;
-
     @ElementCollection
     private Set<String> topics = new LinkedHashSet<>();
-
+    @OneToMany(mappedBy = "lesson")
+    private List<Attendance> attendances;
     public LocalDate getDay() {
         return moment.toLocalDate();
     }
