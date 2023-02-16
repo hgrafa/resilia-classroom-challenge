@@ -17,8 +17,8 @@ public class NewTeamResponse {
     public NewTeamResponse(Team team) {
         this.id = team.getId();
         this.name = team.getName();
-        this.start = team.getStartDate();
-        this.end = team.getEndDate();
+        this.start = team.getStart();
+        this.end = team.getEnd();
     }
 
 }
