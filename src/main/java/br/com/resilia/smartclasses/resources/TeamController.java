@@ -3,10 +3,9 @@ package br.com.resilia.smartclasses.resources;
 import br.com.resilia.smartclasses.domain.dto.NewTeamRequest;
 import br.com.resilia.smartclasses.domain.dto.NewTeamResponse;
 import br.com.resilia.smartclasses.domain.dto.TeamResponse;
-import br.com.resilia.smartclasses.repository.TeamRepository;
 import br.com.resilia.smartclasses.services.TeamService;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,10 +13,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/teams")
+@RequiredArgsConstructor
 public class TeamController {
-
-    @Autowired
-    private TeamService teamService;
+    @NonNull private TeamService teamService;
 
     @GetMapping
     public ResponseEntity<List<TeamResponse>> getAllTeams(
@@ -28,10 +26,18 @@ public class TeamController {
         return ResponseEntity.ok(teamsReponse);
     }
 
-    @PostMapping ResponseEntity<NewTeamResponse> addNewTeam(@RequestBody NewTeamRequest newTeamRequest) {
+    @PostMapping
+    public ResponseEntity<NewTeamResponse> addNewTeam(
+            @RequestBody NewTeamRequest newTeamRequest
+    ) {
         var teamRegisted = teamService.registerTeam(newTeamRequest);
         var teamResponse = new NewTeamResponse(teamRegisted);
         return ResponseEntity.ok(teamResponse);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> removeTeam(@PathVariable long id) {
+        teamService.deleteById(id);
     }
 
 }
