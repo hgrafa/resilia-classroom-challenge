@@ -17,8 +17,8 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private LocalDateTime start;
+    private LocalDateTime end;
     @OneToMany(mappedBy = "team", fetch = FetchType.LAZY)
     private List<Student> students = new ArrayList<>();
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
@@ -27,6 +27,7 @@ public class Team {
 
     public boolean isActive() {
         LocalDateTime now = LocalDateTime.now();
-        return now.isAfter(startDate) && now.isBefore(endDate);
+        return now.isAfter(start) && now.isBefore(end);
     }
+
 }
