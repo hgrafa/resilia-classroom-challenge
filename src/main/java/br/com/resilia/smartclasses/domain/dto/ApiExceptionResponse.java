@@ -1,6 +1,6 @@
 package br.com.resilia.smartclasses.domain.dto;
 
-import br.com.resilia.smartclasses.resources.exceptions.ApiException;
+import br.com.resilia.smartclasses.services.exceptions.ApiException;
 import lombok.*;
 
 import java.time.LocalDateTime;

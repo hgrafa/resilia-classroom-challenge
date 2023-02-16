@@ -1,6 +1,7 @@
-package br.com.resilia.smartclasses.resources.exceptions;
+package br.com.resilia.smartclasses.resources;
 
 import br.com.resilia.smartclasses.domain.dto.ApiExceptionResponse;
+import br.com.resilia.smartclasses.services.exceptions.ApiException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

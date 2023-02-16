@@ -1,4 +1,4 @@
-package br.com.resilia.smartclasses.resources.exceptions;
+package br.com.resilia.smartclasses.services.exceptions;
 
 import lombok.*;
 import org.springframework.http.HttpStatus;
