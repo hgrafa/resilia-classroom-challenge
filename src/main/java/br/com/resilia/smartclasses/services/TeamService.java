@@ -70,9 +70,8 @@ public class TeamService {
         var course = courseRepository.findByName(courseName);
         Course newCourse = toCourse(courseName);
 
-        if(course.isEmpty()){
+        if(course.isEmpty())
             newCourse = courseRepository.save(newCourse);
-        }
 
         return course.orElse(newCourse);
     }
